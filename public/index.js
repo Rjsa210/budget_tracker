@@ -1,3 +1,4 @@
+
 let transactions = [];
 let myChart;
 
@@ -143,6 +144,8 @@ function sendTransaction(isAdding) {
     amountEl.value = "";
   });
 }
+
+
 
 document.querySelector("#add-btn").onclick = function() {
   sendTransaction(true);
