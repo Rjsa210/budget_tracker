@@ -9,10 +9,11 @@ const FILES_TO_CACHE = [
   '/icons/icon-512x512.png',
 ];
 
-const STATIC_CACHE = 'static-cache-v1';
+const STATIC_CACHE = 'static-cache-v2';
 const RUNTIME_CACHE = 'runtime-cache';
 
 self.addEventListener("install", event => {
+  console.log('installing service worker');
   event.waitUntil(
     caches
       .open(STATIC_CACHE)
@@ -23,6 +24,7 @@ self.addEventListener("install", event => {
 
 self.addEventListener('activate', event => {
   const currentCaches = [STATIC_CACHE, RUNTIME_CACHE];
+  console.log('beginning activation');
   event.waitUntil(
     caches
     .keys()
@@ -34,6 +36,7 @@ self.addEventListener('activate', event => {
     .then(cachesToDelete => {
       return Promise.all(
         cachesToDelete.map(cacheToDelete => {
+          console.log('deleting', cacheToDelete);
           return caches.delete(cacheToDelete);
         })
       );
